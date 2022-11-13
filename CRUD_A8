@@ -1,0 +1,17 @@
+db.createCollection("data")
+db.data.insertMany([
+     {RollNo:1,Name:"ABC",Marks:90,Class:"TE"},
+     {RollNo:2,Name:"BCD",Marks:85,Class:"FE"},
+     {RollNo:3,Name:"CDE",Marks:88,Class:"TE"},
+     {RollNo:4,Name:"DEF",Marks:89,Class:"FE"},
+     {RollNo:5,Name:"EFG",Marks:90,Class:"TE"},
+     {RollNo:6,Name:"FGH",Marks:81,Class:"SE"},
+    ])
+    
+  db.data.find()
+  
+  db.data.find({RollNo:{$gt:5}},{RollNo:1,Marks:1})
+  
+  db.data.update({RollNo:4},{$set:{Marks:80}})
+  
+  db.data.deleteMany({Class:"FE"})
