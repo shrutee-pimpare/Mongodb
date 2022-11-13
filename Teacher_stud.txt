@@ -1,0 +1,131 @@
+Use DYPIT
+Create following Collections Teachers(Tname,dno,dname,experience,salary,date_of_joining )
+
+db.createCollection('Teachers')
+db.Teachers.insertMany([{
+    'Tname': 'Sojwal',
+    'dno': 1,
+    'dname': 'Computer',
+    'experience':11,
+    'salary':10001,
+    'date_of_joining':'1/1/2001'
+    }, 
+    {
+    'Tname': 'Omkar',
+    'dno': 2,
+    'dname': 'IT',
+    'experience':5,
+    'salary':100011,
+    'date_of_joining':'2/2/2012'
+    },
+{
+    'Tname': 'Arshad',
+    'dno': 3,
+    'dname': 'E&TC',
+    'experience':17,
+    'salary':200001,
+    'date_of_joining':'9/6/1996'
+    },
+{
+    'Tname': 'Akshay',
+    'dno': 2,
+    'dname': 'IT',
+    'experience':7,
+    'salary':10002,
+    'date_of_joining':'1/1/2011'
+    }])
+
+Students(Sname,roll_no,class)
+db.createCollection(‘Students’)
+db.Students.insertMany([{
+    'Sname': 'Rupesh',
+    'roll_no': 1,
+    'class': 'Computer'
+    }, 
+    {
+    'Sname': 'Ramdas',
+    'roll_no': 2,
+    'class': 'E&TC'
+    },
+    {
+    'Sname': 'Chetan',
+    'roll_no': 3,
+    'class': 'IT'
+    }])
+1.	Find the information about all teachers
+db.Teachers.find().pretty()
+2.	Find the information about all teachers of computer department
+db.Teachers.find({'dname':'Computer'}).pretty()
+3.	Find the information about all teachers of computer,IT,ande&TC department
+db.Teachers.find().pretty()
+4.	Find the information about all teachers of computer,IT,and E&TC department having salary greate than or equl to 10000/-
+
+db.Teachers.find({'salary':{$gte:10000}}).pretty()
+5.	Find the student information having roll_no = 2 or Sname=xyz
+db.Students.find({$or:[{'roll_no':2},{'Sname':'xyz'}]}).pretty()
+6.	Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry.
+
+db.Teachers.insert({
+...     'Tname': 'Praveen',
+...     'dno': 3,
+...     'dname': 'E&TC',
+...     'experience':11,
+...     'salary':5001,
+...     'date_of_joining':'1/1/2021'
+...     })
+
+db.Teachers.updateOne({Tname:'Praveen'}, {$set:{experience:10}})
+
+7.	Update the deparment of all the teachers working in IT deprtment to COMP
+db.Teachers.updateMany({dname:'IT'}, {$set:{dname:'Computer'}})
+8.	find the teachers name and their experience from teachers collection
+db.Teachers.find({},{dname:0,dno:0,salary:0,date_of_joining:0}).pretty()
+db.Teachers.find({},{dno:0,dname:0,salary:0,date_of_joining:0})
+9.	Using Save() method insert one entry in department collection
+
+db.Teachers.save({
+'Tname': 'Rajesh',
+...     'dno': 1,
+...     'dname': 'Computer',
+...     'experience':8,
+...     'salary':50001,
+...     'date_of_joining':'1/1/2019'
+})
+10.	Using Save() method change the dept of teacher Rajesh to IT
+
+
+11.	Delete all the doccuments from teachers collection having IT dept
+
+db.Teachers.deleteMany({“dname”:”IT”})
+
+12.	display with pretty() method, the first 3 doccuments in teachers collection in ascending order
+
+db.Teachers.find().sort({dno:1}).limit(3).pretty()
+
+
+20 1.Create Database DYPIT 
+2. Create following Collections Teachers(Tname,dno,dname,experience,salary,date_of_joining ) Students(Sname,roll_no,class)
+
+3. Find the information about two teachers
+db.Teachers.find().limit(2).pretty()
+4. Find the information about all teachers of computer department
+db.Teachers.find({dname:'Computer'}).pretty()
+
+	5. Find the information about all teachers of computer,IT,ande&TC department
+		Same as question 19
+	6.. Find the information about all teachers of computer,IT,and E&TC department having salary greate than or equl to 25000/-
+		db.Teachers.find({'salary':{$gte:25000}}).pretty()
+
+	7. Find the student information having roll_no = 25 or Sname=xyz
+8. Update the experience of teacher-praveen to 10years, if the entry is not available in database consider the entry as new entry. 
+Same as 19
+9. Update the deparment of all the teachers working in IT deprtment to COMP
+Same as 19
+ 10. find the teachers name and their experience from teachers collection 
+db.Teachers.find({},{dname:0,dno:0,salary:0,date_of_joining:0}).pretty()11. Using Save() method insert one entry in department collection
+ Same as 19
+
+13.	Delete all the doccuments from teachers collection having IT dept. 
+Same as 19
+14. display with pretty() method, the first 5 documents in teachers collection in ascending order
+	db.Teachers.find().sort({dno:1}).limit(5).pretty()

@@ -1,0 +1,7 @@
+Using MapReduce in mongodb solve following queries on given below collection. 
+1. Import zip.json. 
+mongoimport --dbsai --collection zip --file C:\Users\OMKAR\Desktop\zips.json
+2. Find total population in each state.
+db.zip.mapReduce( function() {emit(this.state,this.pop);}, function(key,value){return Array.sum(value)}, { query:{state:"MA"},out:"state_pop_totals"});
+
+db.state_pop_totals.find();

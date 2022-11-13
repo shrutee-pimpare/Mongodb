@@ -1,0 +1,40 @@
+ db.createCollection('games')
+
+db.games.insertMany([{
+    'name': 'life',
+    'gametype': 'joke',
+    'rating': 100
+    }, 
+    {
+    'name': 'Crypto',
+    'gametype': 'Luck',
+    'rating': 10
+    },
+   {
+    'name': 'Solitare',
+    'gametype': 'card',
+    'rating': 80
+    },
+	{
+    'name': 'Pubg',
+    'gametype': 'FPS',
+    'rating': 80
+    },
+	{
+    'name': 'GTA',
+    'gametype': 'open_world',
+    'rating': 75
+    }])
+3. Write a query that returns all the games
+db.games.find().pretty()
+ 4. Write a query that returns the 3 highest rated games.
+db.games.find().sort({rating:-1}).limit(3).pretty()
+ 5. Update your two favourite games to have two achievements called ‘Game Master’ and ‘Speed Demon’.
+db.games.updateOne({name:"GTA"}, {$set:{achievements:"Game-master,Speed-daemon"}})
+{ "acknowledged" : true, "matchedCount" : 1, "modifiedCount" : 1 }
+
+db.games.updateOne({name:"life"},
+... {$set:{achievements:"Game-master","Speed-daemon"}})
+ 6. Write a query that returns all the games that have both the ‘Game Maser’ . the ‘Speed Demon’ achievements.
+db.games.find({"achievements":"Game-master,Speed-daemon"}).pretty()
+ 8. Write a query that returns only games that have achievements

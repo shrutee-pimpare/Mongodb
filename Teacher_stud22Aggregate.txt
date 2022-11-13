@@ -1,0 +1,18 @@
+Create Database DYPIT using MongoDB Create following Collections Teachers(Tname,dno,dname,experience,salary,date_of_joining ) Students(Sname,roll_no,class)
+ 1. Display the department wise average salary
+db.Teachers.aggregate([{$group : {_id : "$dname", salary_avarage : {$avg : "$salary"}}}])
+
+ 2. display the no. Of employees working in each department
+db.Teachers.aggregate( [ { $unwind: "$dname" },  { $sortByCount: "$dname" } ] )
+ 3. Display the department wise total salary of departments having total salary greater than or equals to 50000/- 
+
+4. Write the queries using the different operators like max, min. Etc. 
+Refer above quetion
+5. Create unique index on any field for above given collections 
+db.Teachers.createIndex({Tname:1}, {unique:true})
+6. Create compound index on any fields for above given collections 
+
+7. Show all the indexes created in the database DYPIT 
+db.Teachers.getIndexes()
+8. Show all the indexes created in above collections.
+db.Teachers.getIndexes()
