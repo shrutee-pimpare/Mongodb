@@ -1,0 +1,30 @@
+show dbs
+use db_name
+db.createCollection("data")
+db.data.insertMany([
+     {RollNo:1,Name:"ABC",Marks:90,Class:"TE"},
+     {RollNo:2,Name:"BCD",Marks:85,Class:"FE"},
+     {RollNo:3,Name:"CDE",Marks:88,Class:"TE"},
+     {RollNo:4,Name:"DEF",Marks:89,Class:"FE"},
+     {RollNo:5,Name:"EFG",Marks:90,Class:"TE"},
+     {RollNo:6,Name:"FGH",Marks:81,Class:"SE"},
+    ])
+    
+  db.data.find()
+  
+  db.data.aggregate([{$group:{_id:"$Class"}}]);
+  
+  db.data.aggregate([{$group:{_id:"$Class",Total:{$sum:"$Marks"}}}]);
+  
+  db.data.aggregate([{$group:{_id:"$Class",Minimum_marks:{$min:"$Marks"}}}]);
+  
+  db.data.aggregate([{$group:{_id:"$Class",Maximum_marks:{$max:"$Marks"}}}]);
+
+  db.data.aggregate([{$group:{_id:"$Class",Avg_marks:{$avg:"$Marks"}}}]);
+
+  db.data.aggregate([{$project:{RollNo:1,Name:1,Marks:1,_id:0}}]);
+  db.data.aggregate([{$match:{Class:"TE"}}]);
+  db.data.aggregate([{$match:{Class:"TE"}},{$project:{RollNo:1,Marks:1,_id:0}}])
+  db.data.createIndex({"RollNo":1})
+  db.data.getIndexes();
+  db.data.dropIndex({"RollNo":1})
