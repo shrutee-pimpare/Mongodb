@@ -1,0 +1,20 @@
+C:\Program Files\MongoDB\Server\6.0\bin>mongoimport --db bigdata --collection zip --file C:\Users\dell\Downloads\Mongo\zips.json
+
+C:\Program Files\MongoDB\Server\6.0\bin>mongosh
+show dbs
+
+use bigdata;
+
+show tables;
+
+db.zip.mapReduce(
+ function() {emit(this.city,this.pop);},
+ function(key,value){return Array.sum(value)},
+ {
+ query:{state:"NY"},
+ out:"city_pop_totals"
+ }
+ );
+
+db.city_pop_totals.find();
+
